@@ -18,13 +18,16 @@ from jol_bitrix24_integration.logging.audit import AuditLogger
 logger = logging.getLogger(__name__)
 
 
-# noinspection PyMissingConstructor
 @dataclass
 class RotationPolicy:
     """Defines the token rotation policy parameters."""
 
     max_lifetime_days: int = 90
     warn_before_days: int = 14  # emit warning N days before expiry
+
+    def __init__(self, max_lifetime_days: int = 90, warn_before_days: int = 14) -> None:
+        self.max_lifetime_days = max_lifetime_days
+        self.warn_before_days = warn_before_days
 
     @property
     def max_lifetime_seconds(self) -> float:

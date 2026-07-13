@@ -17,7 +17,6 @@ from dotenv import load_dotenv
 logger = logging.getLogger(__name__)
 
 
-# noinspection PyMissingConstructor
 @dataclass(frozen=True)
 class Settings:
     """Immutable configuration for the integration service.
@@ -62,6 +61,47 @@ class Settings:
 
     # Environment tag (dev / staging / prod)
     environment: str = "dev"
+
+    def __init__(  # noqa: PLW3271
+        self,
+        *,
+        bitrix24_base_url: str = "",
+        bitrix24_client_id: str = "",
+        bitrix24_client_secret: str = "",
+        bitrix24_redirect_uri: str = "",
+        bitrix24_tls_verify: bool = True,
+        bitrix24_tls_ca_bundle: str = "",
+        bitrix24_webhook_secret: str = "",
+        bitrix24_webhook_url: str = "",
+        token_rotation_interval_days: int = 90,
+        token_encryption_key: str = "",
+        sync_interval_minutes: int = 15,
+        sync_batch_size: int = 100,
+        sync_conflict_strategy: str = "manual_review",
+        log_level: str = "INFO",
+        audit_log_path: str = "/var/log/jol-bitrix24/audit.log",
+        pii_logging_enabled: bool = False,
+        database_url: str = "",
+        environment: str = "dev",
+    ) -> None:
+        object.__setattr__(self, "bitrix24_base_url", bitrix24_base_url)
+        object.__setattr__(self, "bitrix24_client_id", bitrix24_client_id)
+        object.__setattr__(self, "bitrix24_client_secret", bitrix24_client_secret)
+        object.__setattr__(self, "bitrix24_redirect_uri", bitrix24_redirect_uri)
+        object.__setattr__(self, "bitrix24_tls_verify", bitrix24_tls_verify)
+        object.__setattr__(self, "bitrix24_tls_ca_bundle", bitrix24_tls_ca_bundle)
+        object.__setattr__(self, "bitrix24_webhook_secret", bitrix24_webhook_secret)
+        object.__setattr__(self, "bitrix24_webhook_url", bitrix24_webhook_url)
+        object.__setattr__(self, "token_rotation_interval_days", token_rotation_interval_days)
+        object.__setattr__(self, "token_encryption_key", token_encryption_key)
+        object.__setattr__(self, "sync_interval_minutes", sync_interval_minutes)
+        object.__setattr__(self, "sync_batch_size", sync_batch_size)
+        object.__setattr__(self, "sync_conflict_strategy", sync_conflict_strategy)
+        object.__setattr__(self, "log_level", log_level)
+        object.__setattr__(self, "audit_log_path", audit_log_path)
+        object.__setattr__(self, "pii_logging_enabled", pii_logging_enabled)
+        object.__setattr__(self, "database_url", database_url)
+        object.__setattr__(self, "environment", environment)
 
     @classmethod
     def from_env(cls, env_file: str | Path | None = None) -> Settings:

@@ -18,7 +18,6 @@ from enum import StrEnum
 logger = logging.getLogger(__name__)
 
 
-# noinspection PyMissingConstructor
 class SyncOperation(StrEnum):
     """Types of sync operations that can be queued."""
 
@@ -26,8 +25,10 @@ class SyncOperation(StrEnum):
     UPDATE = "update"
     DELETE = "delete"
 
+    def __init__(self, value: str) -> None:  # noqa: PLW3271
+        self._value_ = value
 
-# noinspection PyMissingConstructor
+
 @dataclass
 class RetryItem:
     """A single item on the retry queue."""
@@ -40,6 +41,26 @@ class RetryItem:
     next_retry_at: float = 0.0  # Unix timestamp
     last_error: str = ""
     created_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
+
+    def __init__(
+        self,
+        operation: SyncOperation,
+        entity_type: str,
+        entity_id: str,
+        attempt_count: int = 0,
+        max_attempts: int = 5,
+        next_retry_at: float = 0.0,
+        last_error: str = "",
+        created_at: str = "",
+    ) -> None:
+        self.operation = operation
+        self.entity_type = entity_type
+        self.entity_id = entity_id
+        self.attempt_count = attempt_count
+        self.max_attempts = max_attempts
+        self.next_retry_at = next_retry_at
+        self.last_error = last_error
+        self.created_at = created_at or datetime.now(UTC).isoformat()
 
     @property
     def is_exhausted(self) -> bool:

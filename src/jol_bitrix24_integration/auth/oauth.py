@@ -18,7 +18,6 @@ from cryptography.fernet import Fernet
 logger = logging.getLogger(__name__)
 
 
-# noinspection PyMissingConstructor
 @dataclass
 class TokenSet:
     """Represents an OAuth2 token pair with expiry metadata."""
@@ -27,6 +26,18 @@ class TokenSet:
     refresh_token: str
     expires_at: float  # Unix timestamp
     scope: str = ""
+
+    def __init__(
+        self,
+        access_token: str,
+        refresh_token: str,
+        expires_at: float,
+        scope: str = "",
+    ) -> None:
+        self.access_token = access_token
+        self.refresh_token = refresh_token
+        self.expires_at = expires_at
+        self.scope = scope
 
     @property
     def is_expired(self) -> bool:
