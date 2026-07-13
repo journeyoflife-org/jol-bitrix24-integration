@@ -1,4 +1,4 @@
-version: "2023.3"
+version: "1.0"
 
 profile:
   name: jol-bitrix24-integration
