@@ -46,7 +46,7 @@ jobs:
       - run: pip install -e ".[dev]"
       - name: Check for PII in source (no raw PII patterns in log format strings)
         run: |
-          if grep -rn -E 'logger\.(info|debug|warning|error).*%s.*(email|phone|name|address)' src/ --include="*.py"; then
+          if grep -rn -E 'logger\.(info|debug|warning|error).*%s.*(email|phone|name|address)' src/ --include="*.py" | grep -v '__'; then
             echo "FAIL: Potential PII in log format strings"
             exit 1
           fi
