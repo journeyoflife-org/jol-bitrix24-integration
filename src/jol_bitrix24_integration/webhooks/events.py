@@ -10,6 +10,7 @@ from __future__ import annotations
 from enum import StrEnum
 
 
+# noinspection PyMissingConstructor
 class Bitrix24EventType(StrEnum):
     """Supported Bitrix24 CRM webhook event types."""
 
@@ -30,7 +31,7 @@ class Bitrix24EventType(StrEnum):
 
 
 # All known event values for quick membership testing.
-KNOWN_EVENT_VALUES: frozenset[str] = frozenset({e.value for e in Bitrix24EventType})
+KNOWN_EVENT_VALUES: frozenset[str] = frozenset([e.value for e in list(Bitrix24EventType)])
 
 
 def is_known_event(event_value: str) -> bool:

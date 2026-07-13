@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 logger = logging.getLogger(__name__)
 
 
+# noinspection PyMissingConstructor
 @dataclass(frozen=True)
 class Settings:
     """Immutable configuration for the integration service.

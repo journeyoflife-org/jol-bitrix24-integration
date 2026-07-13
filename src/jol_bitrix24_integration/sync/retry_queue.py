@@ -18,6 +18,7 @@ from enum import StrEnum
 logger = logging.getLogger(__name__)
 
 
+# noinspection PyMissingConstructor
 class SyncOperation(StrEnum):
     """Types of sync operations that can be queued."""
 
@@ -26,6 +27,7 @@ class SyncOperation(StrEnum):
     DELETE = "delete"
 
 
+# noinspection PyMissingConstructor
 @dataclass
 class RetryItem:
     """A single item on the retry queue."""

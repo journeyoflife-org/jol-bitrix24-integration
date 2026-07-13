@@ -18,6 +18,7 @@ from cryptography.fernet import Fernet
 logger = logging.getLogger(__name__)
 
 
+# noinspection PyMissingConstructor
 @dataclass
 class TokenSet:
     """Represents an OAuth2 token pair with expiry metadata."""

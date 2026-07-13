@@ -18,6 +18,7 @@ from jol_bitrix24_integration.logging.audit import AuditLogger
 logger = logging.getLogger(__name__)
 
 
+# noinspection PyMissingConstructor
 @dataclass
 class RotationPolicy:
     """Defines the token rotation policy parameters."""
@@ -107,3 +108,6 @@ class TokenRotationManager:
 
 class TokenRotationError(Exception):
     """Raised when automated token rotation fails."""
+
+    def __init__(self, message: str) -> None:
+        super().__init__(message)

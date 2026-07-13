@@ -70,6 +70,7 @@ class Bitrix24Client:
         return self._call("crm.contact.get", {"ID": contact_id})
 
     @_RETRY_TRANSIENT
+    # noinspection PyUnusedLocal
     def list_contacts(self, start: int = 0, batch: int = 50) -> dict[str, Any]:
         """List CRM contacts with pagination."""
         params = {"start": start, "order": {"ID": "ASC"}, "batch": batch}
