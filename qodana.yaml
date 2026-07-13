@@ -2,3 +2,5 @@ version: "2023.3"
 
 profile:
   name: jol-bitrix24-integration
+
+linter: jetbrains/qodana-python:2024.3
