@@ -51,11 +51,11 @@ class TokenRotationManager:
         self._audit = audit_logger
         self._policy = policy or RotationPolicy()
 
-    def needs_rotation(self, token_set: TokenSet, issued_at: float) -> bool:
+    def needs_rotation(self, issued_at: float) -> bool:
         """Return True if the token has exceeded its maximum lifetime."""
         return (time.time() - issued_at) >= self._policy.max_lifetime_seconds
 
-    def should_warn(self, token_set: TokenSet, issued_at: float) -> bool:
+    def should_warn(self, issued_at: float) -> bool:
         """Return True if the token is approaching its rotation deadline."""
         warn_threshold = self._policy.max_lifetime_seconds - (self._policy.warn_before_days * 86400)
         return (time.time() - issued_at) >= warn_threshold
@@ -89,7 +89,7 @@ class TokenRotationManager:
             logger.error("Token rotation failed: %s", type(exc).__name__)
             raise TokenRotationError(str(exc)) from exc
 
-    def revoke(self, token_set: TokenSet, reason: str = "offboarding") -> None:
+    def revoke(self, reason: str = "offboarding") -> None:
         """Emergency token revocation (e.g. employee offboarding).
 
         Bitrix24 does not expose a dedicated revocation endpoint for

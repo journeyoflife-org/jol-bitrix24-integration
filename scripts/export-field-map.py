@@ -13,6 +13,7 @@ Requires the package to be installed (pip install -e .).
 import csv
 import sys
 from pathlib import Path
+from typing import IO
 
 from jol_bitrix24_integration.mappings.field_mapping import (
     CONTACT_FIELD_MAP,
@@ -24,7 +25,7 @@ from jol_bitrix24_integration.mappings.field_mapping import (
 def export_mapping(
     entity_type: str,
     field_map: dict[str, str],
-    writer: csv.writer,
+    writer: IO[str],
 ) -> None:
     """Write one entity type's mapping to the CSV writer."""
     for jol_field, bitrix24_field in sorted(field_map.items()):
@@ -32,7 +33,10 @@ def export_mapping(
 
 
 def main() -> None:
-    output = Path(sys.argv[sys.argv.index("--output") + 1]) if "--output" in sys.argv else Path("field-mapping.csv")
+    if "--output" in sys.argv:
+        output = Path(sys.argv[sys.argv.index("--output") + 1])
+    else:
+        output = Path("field-mapping.csv")
 
     with open(output, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)

@@ -30,7 +30,7 @@ class Bitrix24EventType(StrEnum):
 
 
 # All known event values for quick membership testing.
-KNOWN_EVENT_VALUES: frozenset[str] = frozenset(e.value for e in Bitrix24EventType)
+KNOWN_EVENT_VALUES: frozenset[str] = frozenset({e.value for e in Bitrix24EventType})
 
 
 def is_known_event(event_value: str) -> bool:

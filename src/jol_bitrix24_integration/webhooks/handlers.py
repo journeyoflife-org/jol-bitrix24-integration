@@ -116,7 +116,7 @@ class WebhookDispatcher:
                 details={"event": event_value},
             )
             return True
-        except Exception:
+        except Exception:  # noqa: BLE001 — catch-all intentional for audit logging
             self._audit.log_event(
                 event_type="webhook_received",
                 status="failure",

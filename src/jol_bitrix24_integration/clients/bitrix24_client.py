@@ -72,7 +72,8 @@ class Bitrix24Client:
     @_RETRY_TRANSIENT
     def list_contacts(self, start: int = 0, batch: int = 50) -> dict[str, Any]:
         """List CRM contacts with pagination."""
-        return self._call("crm.contact.list", {"start": start, "order": {"ID": "ASC"}})
+        params = {"start": start, "order": {"ID": "ASC"}, "batch": batch}
+        return self._call("crm.contact.list", params)
 
     @_RETRY_TRANSIENT
     def create_contact(self, fields: dict[str, Any]) -> dict[str, Any]:

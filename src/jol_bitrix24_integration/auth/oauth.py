@@ -132,7 +132,8 @@ class OAuthManager:
 
     # -- Internal --------------------------------------------------------------
 
-    def _parse_token_response(self, data: dict[str, Any]) -> TokenSet:
+    @staticmethod
+    def _parse_token_response(data: dict[str, Any]) -> TokenSet:
         """Parse the Bitrix24 token endpoint response into a TokenSet."""
         return TokenSet(
             access_token=data["access_token"],
