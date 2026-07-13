@@ -1,0 +1,35 @@
+name: Compliance Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "compliance/**"
+      - "docs/field-mapping.md"
+      - "docs/DPIA-template.md"
+      - "src/**/mappings/**"
+
+jobs:
+  compliance-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Flag compliance files changed
+        run: |
+          echo "⚠️ Compliance-related files were modified."
+          echo "This PR requires review by the compliance team / DPO."
+          echo ""
+          echo "Changed files:"
+          git diff --name-only ${{ github.event.pull_request.base.sha }} HEAD | grep -E '(compliance|field-mapping|DPIA)' || true
+      - name: Verify field mapping export works
+        run: |
+          pip install -e .
+          python scripts/export-field-map.py --output /tmp/test-field-map.csv
+          # Verify CSV header and content
+          head -1 /tmp/test-field-map.csv | grep -q "Entity Type"
+          LINES=$(wc -l < /tmp/test-field-map.csv)
+          if [ "$LINES" -lt 30 ]; then
+            echo "FAIL: Expected at least 30 mapping rows, got $LINES"
+            exit 1
+          fi
+          echo "Field mapping export: OK ($LINES rows)"

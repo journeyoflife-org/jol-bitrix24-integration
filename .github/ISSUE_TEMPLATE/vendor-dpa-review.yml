@@ -1,0 +1,39 @@
+name: Vendor DPA Review
+description: Track DPA or compliance review for Bitrix24 or sub-processors
+labels: ["compliance", "dpa"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to track DPA review status for vendors and sub-processors.
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor Name
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: DPA Status
+      options:
+        - Pending review
+        - Under review
+        - Approved
+        - Rejected
+        - Not applicable (self-hosted)
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Review findings, open items, or justification for N/A
+  - type: input
+    id: reviewer
+    attributes:
+      label: Reviewer
+  - type: input
+    id: review_date
+    attributes:
+      label: Review Date

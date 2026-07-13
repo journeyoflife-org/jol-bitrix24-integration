@@ -1,0 +1,38 @@
+name: Integration Change
+description: Propose a change to the Bitrix24 API integration (field mapping, event, endpoint)
+labels: ["integration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Integration changes affect the contract between JOL and Bitrix24.
+        These require review by both engineering and compliance teams.
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Change Type
+      options:
+        - New field mapping
+        - Modified field mapping
+        - New webhook event
+        - API endpoint change
+        - Schema update
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is changing and why?
+    validations:
+      required: true
+  - type: textarea
+    id: ropa_impact
+    attributes:
+      label: ROPA / Art. 30 Impact
+      description: Does this change require updating the Records of Processing Activities?
+  - type: textarea
+    id: pii_impact
+    attributes:
+      label: PII Impact
+      description: Does this introduce new personal data categories?

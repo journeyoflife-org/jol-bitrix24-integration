@@ -1,0 +1,28 @@
+name: Feature Request
+description: Request a new feature for the JOL-Bitrix24 integration
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the feature and its use case
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Sync engine
+        - Field mapping
+        - Auth/token management
+        - Webhook handling
+        - Logging/audit
+        - Compliance tooling
+        - Other
+  - type: textarea
+    id: gdpr_impact
+    attributes:
+      label: GDPR / Compliance Impact
+      description: Does this feature affect personal data processing?

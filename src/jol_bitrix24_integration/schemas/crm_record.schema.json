@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CRM Record",
+  "description": "Normalised CRM record structure used internally by the sync engine",
+  "type": "object",
+  "required": ["entity_type", "id"],
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "enum": ["contact", "deal", "company"]
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique entity identifier"
+    },
+    "source_system": {
+      "type": "string",
+      "enum": ["jol", "bitrix24"],
+      "description": "Origin of the record"
+    },
+    "fields": {
+      "type": "object",
+      "description": "Mapped field key-value pairs"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of last modification"
+    },
+    "sync_status": {
+      "type": "string",
+      "enum": ["pending", "synced", "conflict", "error"],
+      "description": "Current synchronisation status"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,13 @@
+version: "2023.3"
+
+profile:
+  name: jol-bitrix24-integration
+
+include:
+  - "src/**"
+  - "tests/**"
+
+exclude:
+  - "**/*.md"
+  - "docs/**"
+  - "compliance/**"

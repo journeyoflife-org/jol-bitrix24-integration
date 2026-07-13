@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bitrix24 Webhook Event",
+  "description": "Schema for incoming Bitrix24 webhook event payloads",
+  "type": "object",
+  "required": ["event", "data"],
+  "properties": {
+    "event": {
+      "type": "string",
+      "description": "The Bitrix24 event identifier",
+      "enum": [
+        "ONCRMCONTACTADD", "ONCRMCONTACTUPDATE", "ONCRMCONTACTDELETE",
+        "ONCRMDEALADD", "ONCRMDEALUPDATE", "ONCRMDEALDELETE",
+        "ONCRMCOMPANYADD", "ONCRMCOMPANYUPDATE", "ONCRMCOMPANYDELETE"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload (entity data)",
+      "properties": {
+        "FIELDS": {
+          "type": "object",
+          "properties": {
+            "ID": { "type": ["string", "integer"] }
+          },
+          "required": ["ID"]
+        }
+      }
+    },
+    "ts": {
+      "type": "string",
+      "description": "Unix timestamp of the event"
+    },
+    "auth": {
+      "type": "object",
+      "description": "Authentication context",
+      "properties": {
+        "domain": { "type": "string" },
+        "client_endpoint": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}
