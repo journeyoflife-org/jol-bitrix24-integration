@@ -1,14 +1,14 @@
 # Code owners for jol-bitrix24-integration
 # Each line: path pattern  @owner(s)
 
-*                           @journeyoflife-org/core-team
+*                                   @journeyoflife-org/backend
 
-src/**/auth/                @journeyoflife-org/security-team
-src/**/webhooks/            @journeyoflife-org/security-team
-src/**/logging/             @journeyoflife-org/security-team
+src/**/auth/                        @journeyoflife-org/security
+src/**/webhooks/                    @journeyoflife-org/security
+src/**/logging/                     @journeyoflife-org/security
 
-compliance/                 @journeyoflife-org/compliance-team @journeyoflife-org/dpo
-docs/DPIA-template.md       @journeyoflife-org/dpo
-docs/incident-playbook.md   @journeyoflife-org/security-team
+compliance/                         @journeyoflife-org/security
+docs/DPIA-template.md               @journeyoflife-org/security
+docs/incident-playbook.md           @journeyoflife-org/security
 
-.github/workflows/          @journeyoflife-org/devops-team
+.github/workflows/                  @journeyoflife-org/devops
