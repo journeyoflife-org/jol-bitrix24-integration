@@ -9,6 +9,9 @@ on:
       - "docs/DPIA-template.md"
       - "src/**/mappings/**"
 
+permissions:
+  contents: read
+
 jobs:
   compliance-review:
     runs-on: ubuntu-latest
