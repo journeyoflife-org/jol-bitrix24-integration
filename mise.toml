@@ -1,0 +1,14 @@
+[tools]
+python = ["3.12", "3.11"]
+
+[tasks.deps]
+description = "Install package + dev extras (pip editable, unchanged from CI)"
+run = "pip install -e \".[dev]\""
+
+[tasks.lint]
+description = "ruff + black + mypy (mirrors CI lint job)"
+run = "ruff check src/ tests/ && black --check src/ tests/ && mypy src/"
+
+[tasks.test]
+description = "pytest with coverage (mirrors CI test job)"
+run = "pytest --cov=src --cov-report=xml"

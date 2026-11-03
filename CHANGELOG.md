@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Adopted mise: mise.toml + mise.lock pin python 3.11.18/3.12.16 (SHA256 + GitHub attestations); CI lint/test/security-scan bootstrap the interpreter via pinned jdx/mise-action with a venv on PATH (was unpinned setup-python@v5). pip install -e .[dev], all check commands, and the PII/secret greps + pip-audit are unchanged; job names lint/test/security-scan preserved.
 - Initial project scaffold with full directory structure
 - Bitrix24 Enterprise On-Premise REST API client with TLS and retry
 - OAuth2 authorization-code flow with Fernet token encryption at rest
